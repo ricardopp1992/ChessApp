@@ -1,11 +1,17 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from 'react-native'
 
 export const themes = {
   buttonBorderRadius: 20,
   primaryColor: '#BF7F00',
+  secondaryColor: '#7D4B00',
   textColor: '#fff',
   primaryTransparent: 'rgba(153, 102, 0, 0.17)',
   homeButton: '#996600',
+  grayColor: '#DEE2E6',
+  secondaryColorText: '#000',
+  headerHeight: 60,
+  overlayColor: '#bf7f0085',
+  backgroundInput: '#C4C4C450',
 }
 
 export const customDrawerStyle = StyleSheet.create({
@@ -33,9 +39,14 @@ export const customDrawerStyle = StyleSheet.create({
     width: '100%',
     height: '100%'
   },
+  drawerItemText: {
+    fontSize: 15,
+    fontWeight: '800',
+    color: themes.textColor
+  },
 })
 
-export const buttonPrimaryStyle = StyleSheet.create({
+export const buttonSecondaryStyle = StyleSheet.create({
   button: {
     backgroundColor: themes.homeButton,
     borderRadius: themes.buttonBorderRadius,
@@ -48,4 +59,20 @@ export const buttonPrimaryStyle = StyleSheet.create({
     color: themes.textColor,
     fontWeight: '800',
   }
+})
+
+export const buttonPrimaryStyle = StyleSheet.create({
+  button: {
+    backgroundColor: themes.primaryColor,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: '2%',
+    paddingHorizontal: '7%',
+  },
+  text: {
+    color: themes.textColor,
+    fontSize: 18,
+    fontWeight: '800',
+  },
 })

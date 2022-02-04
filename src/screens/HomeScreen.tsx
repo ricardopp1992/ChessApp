@@ -1,30 +1,50 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { ImageBackground, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 
-import { buttonPrimaryStyle, themes } from '@assets/Themes'
+import { buttonSecondaryStyle, themes } from '@assets/Themes'
+import { HomeButtonProps, HomeScreenProps } from 'interfaces/ScreenInterfaces'
+import { StackNavigatorScreens } from '../config'
+
 const chessTableImg = require('../assets/Tablero.png')
 const queensImg = require('../assets/queens.png')
 
-const HomeScreen = () => {
+const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+  const navigateTo = useCallback((screen: StackNavigatorScreens) =>
+    navigation.navigate(screen),
+    [navigation]
+  )
+
   return (
     <ImageBackground style={styles.chessTableBackground} source={chessTableImg} >
       <ImageBackground source={queensImg} resizeMode="contain" style={styles.queenBackground} />
       <View style={styles.homeContainer}>
         <Text style={styles.chessWatchText}>Chess Watch</Text>
         <View style={styles.buttonContainer}>
-          <ButtonHome>Start</ButtonHome>
-          <ButtonHome>Instructions</ButtonHome>
-          <ButtonHome>History</ButtonHome>
+          <ButtonHome
+            onHandlePress={() => navigateTo(StackNavigatorScreens.START_SCREEN)}
+          >
+            Start
+          </ButtonHome>
+          <ButtonHome
+            onHandlePress={() => navigateTo(StackNavigatorScreens.START_SCREEN)}
+          >
+            Instructions
+          </ButtonHome>
+          <ButtonHome
+            onHandlePress={() => navigateTo(StackNavigatorScreens.START_SCREEN)}
+          >
+            History
+          </ButtonHome>
         </View>
       </View>
     </ImageBackground>
   )
 }
 
-const ButtonHome: FC = ({ children }) => {
+const ButtonHome: FC<HomeButtonProps> = ({ children, onHandlePress }) => {
   return (
-    <TouchableOpacity style={buttonPrimaryStyle.button}>
-      <Text style={buttonPrimaryStyle.text}>{children}</Text>
+    <TouchableOpacity onPress={onHandlePress} style={buttonSecondaryStyle.button}>
+      <Text style={buttonSecondaryStyle.text}>{children}</Text>
     </TouchableOpacity>
   )
 }

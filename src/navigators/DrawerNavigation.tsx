@@ -1,14 +1,15 @@
 import React, { FC } from 'react'
-import { Image, Text, TouchableWithoutFeedback, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { createDrawerNavigator, DrawerContentComponentProps } from '@react-navigation/drawer'
 
-import HomeScreen from '@screens/HomeScreen'
+import { DrawerRootNavigatorProps } from '@interfaces/NavigatorInterfaces'
+import StackNavigator from '@navigators/StackNavigator'
 import { customDrawerStyle, themes } from '@assets/Themes'
-import { DrawerNavigationEnum } from '../config'
+import { DrawerNavigationEnum, StackNavigatorScreens } from '../config'
 
-const iconLogo = require('../assets/queens.png')
+const iconLogo = require('../assets/queens.png') 
 
-const { Navigator, Screen } = createDrawerNavigator()
+const { Navigator, Screen } = createDrawerNavigator<DrawerRootNavigatorProps>()
 
 const DrawerNavigator = () => (
   <Navigator
@@ -20,11 +21,15 @@ const DrawerNavigator = () => (
       headerShown: false,
     }}
   >
-    <Screen name={DrawerNavigationEnum.HOME_SCREEN} component={HomeScreen} />
+    <Screen name={DrawerNavigationEnum.STACK_NAVIGATOR} component={StackNavigator} />
   </Navigator>
 )
 
 const CustomDrawer: FC<DrawerContentComponentProps> = (props) => {
+  const navigateTo = (screen: StackNavigatorScreens) => {
+    props.navigation.navigate(screen)
+  }
+
   return (
     <View style={customDrawerStyle.drawerContainer}>
       <View style={customDrawerStyle.logoContainer}>
@@ -32,9 +37,9 @@ const CustomDrawer: FC<DrawerContentComponentProps> = (props) => {
         <Text style={customDrawerStyle.logoText}>Chess Watch</Text>
       </View>
       <View style={customDrawerStyle.drawerItems}>
-        <TouchableWithoutFeedback>
-          <Text>Home</Text>
-        </TouchableWithoutFeedback>
+        <TouchableOpacity onPress={() => navigateTo(StackNavigatorScreens.HOME_SCREEN)}>
+          <Text style={customDrawerStyle.drawerItemText}>Home</Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
