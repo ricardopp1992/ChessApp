@@ -1,21 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, SliceCaseReducers } from '@reduxjs/toolkit'
 
-import { TimeState } from '@interfaces/StoreInterfaces'
+import { INewWatch } from '@interfaces/components/StartWatch.interface'
 
-const initialState: TimeState = {
-  selectedTime: 0
+const initialState: INewWatch = {
+  whiteName: '',
+  blackName: '',
+  minutes: '',
+  seconds: '',
 }
 
-const timeSlice = createSlice({
+const timeSlice = createSlice<INewWatch, SliceCaseReducers<INewWatch>, string>({
   name: 'time',
   initialState,
   reducers: {
-    setSelectedTime(state, action) {
-      state.selectedTime = action.payload
+    setNames(state, action) {
+      state.blackName = action.payload.blackName
+      state.whiteName = action.payload.whiteName
+    },
+    setTime(state, action) {
+      state.minutes = action.payload.minutes
+      state.seconds = action.payload.seconds
     }
   }
 })
 
-export const { setSelectedTime } = timeSlice.actions
+export const { setNames, setTime } = timeSlice.actions
 
 export default timeSlice.reducer

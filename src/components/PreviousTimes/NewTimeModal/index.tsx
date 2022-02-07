@@ -7,14 +7,20 @@ import {
   useWindowDimensions,
   View
 } from 'react-native'
+import { useFormik } from 'formik'
 
-import { NewTimeModalProps } from '@interfaces/components/StartWatch.interface'
+import { INewWatch, NewTimeModalProps } from '@interfaces/components/StartWatch.interface'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { buttonPrimaryStyle, themes } from '@assets/Themes'
 
-const NewTimeModal: FC<NewTimeModalProps> = ({ closeModal }) => {
+const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit }) => {
+  const initialValues: INewWatch = { whiteName: '', blackName: '', minutes: '', seconds: '' }
   const [heightWithKeyboard, setHeightWithKeyboard] = useState<{ height?: string, marginTop?: string }>()
   const { height: windowHeight } = useWindowDimensions()
+  const { values, handleChange, handleBlur, handleSubmit } = useFormik({
+    initialValues,
+    onSubmit: onHandleSubmit
+  })
 
   const onShowKeyboard = (event: KeyboardEvent) => {
     const keyboardHeightPlusHeader = event.endCoordinates.height + themes.headerHeight
@@ -33,6 +39,10 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ closeModal }) => {
   }
 
   useEffect(() => {
+    console.log(values);
+  }, [values])
+
+  useEffect(() => {
     Keyboard.addListener('keyboardDidShow', onShowKeyboard)
     Keyboard.addListener('keyboardDidHide', onHideKeyboard)
 
@@ -47,21 +57,39 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ closeModal }) => {
       <View style={{ ...styles.newTimeModalContainer, ...heightWithKeyboard }}>
         <View>
           <Text style={styles.modalText}>White Names: </Text>
-          <TextInput placeholder='white name' />
+          <TextInput
+            onChangeText={handleChange('whiteName')}
+            onBlur={handleBlur('whiteName')}
+            value={values.whiteName}
+            placeholder='white name' />
           <Text style={styles.modalText}>Blacks Names: </Text>
-          <TextInput placeholder='black name' />
+          <TextInput
+            onChangeText={handleChange('blackName')}
+            onBlur={handleBlur('blackName')}
+            value={values.blackName}
+            placeholder='black name' />
           <View style={styles.timeFormContainer}>
             <Text style={styles.newTimeText}>Add new time: </Text>
             <View style={styles.inputs}>
-              <TextInput style={styles.textInput} placeholder="00" />
+              <TextInput
+                keyboardType="numeric"
+                onChangeText={handleChange('minutes')}
+                onBlur={handleBlur('minutes')}
+                value={values.minutes}
+                style={styles.textInput} placeholder="00min" />
               <Text style={{ marginHorizontal: '1%' }}>:</Text>
-              <TextInput style={styles.textInput} placeholder="00" />
+              <TextInput
+                keyboardType="numeric"
+                onChangeText={handleChange('seconds')}
+                onBlur={handleBlur('seconds')}
+                value={values.seconds}
+                style={styles.textInput} placeholder="00sec" />
             </View>
           </View>
         </View>
 
         <TouchableOpacity
-          onPress={() => closeModal()}
+          onPress={handleSubmit}
           style={{ ...buttonPrimaryStyle.button, ...styles.startTimerButton }}
         >
           <Text style={buttonPrimaryStyle.text}>Start Watch</Text>

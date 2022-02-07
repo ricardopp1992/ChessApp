@@ -5,4 +5,5 @@ export enum DrawerNavigationEnum {
 export enum StackNavigatorScreens {
   HOME_SCREEN = 'HOME_SCREEN',
   START_SCREEN = 'START_SCREEN',
+  TIMER_SCREEN = 'TIMER_SCREEN',
 }

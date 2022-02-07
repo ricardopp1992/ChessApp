@@ -5,5 +5,12 @@ export interface PreviousTimesProps {
 }
 
 export interface NewTimeModalProps {
-  closeModal: Function
+  onHandleSubmit: (values: INewWatch) => void | Promise<void>
+}
+
+export interface INewWatch {
+  whiteName: string,
+  blackName: string,
+  minutes: string,
+  seconds: string,
 }

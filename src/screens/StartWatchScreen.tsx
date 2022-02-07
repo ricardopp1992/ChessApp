@@ -5,9 +5,14 @@ import { StartWatchScreenProps } from '@interfaces/ScreenInterfaces'
 import PreviousTimes from '@components/PreviousTimes'
 import Footer from '@components/Footer/index'
 import NewTimeModal from '@components/PreviousTimes/NewTimeModal'
+import { INewWatch } from '@interfaces/components/StartWatch.interface'
+import { StackNavigatorScreens } from '../config'
+import { useDispatch } from 'react-redux'
+import { setNames, setTime } from '@store/timeSlice'
 
 const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false)
+  const dispatch = useDispatch()
 
   const openNewModal = () => {
     setShowModal(true)
@@ -15,10 +20,18 @@ const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
 
   const closeModal = () => setShowModal(false)
 
+  const onHandleSubmit = (values: INewWatch) => {
+    const { whiteName, blackName, minutes, seconds } = values
+    dispatch(setNames({ whiteName, blackName }))
+    dispatch(setTime({ minutes, seconds }))
+    closeModal()
+    navigation.navigate(StackNavigatorScreens.TIMER_SCREEN)
+  }
+
   return (
     <View style={styles.startWatchContainer}>
       <PreviousTimes handleOpenModal={openNewModal} />
-      {showModal && <NewTimeModal closeModal={closeModal} />}
+      {showModal && <NewTimeModal onHandleSubmit={onHandleSubmit} />}
       <Footer />
     </View>
   )
