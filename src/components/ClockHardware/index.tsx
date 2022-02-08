@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { FC, useCallback, useEffect, useState } from 'react'
 import { ImageBackground, Text, TouchableOpacity, View } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import { TimeState } from '@interfaces/StoreInterfaces'
+import { ClockHardwareProps } from '@interfaces/components/Clock.interface'
+import GameOverModal from '@components/GameOverModal'
 import { RootChessAppState } from '@store/store'
 import { buttonPrimaryStyle } from '@assets/Themes'
 import { parseTime } from '@utils/helpers'
@@ -11,7 +13,7 @@ import styles from './clockHardware.style'
 
 const clockBackground = require('../../assets/queenVector.png')
 
-const ClockHardware = () => {
+const ClockHardware: FC<ClockHardwareProps> = ({ goBackToHome }) => {
   const {
     whitesTime,
     blacksTime,
@@ -21,9 +23,10 @@ const ClockHardware = () => {
     pauseTime,
     isPaused,
   } = useClock()
-  const { blacksName, whitesName } = useSelector<RootChessAppState, TimeState>(
+  const { blacksName, whitesName, hasGameEnd } = useSelector<RootChessAppState, TimeState>(
     (state) => state.time
   )
+  const [showModal, setShowModal] = useState(false)
 
   const allowPressTime = (turn: string) => {
     if (turn === 'white' && isWhiteTurn) toggleTurn()
@@ -31,6 +34,16 @@ const ClockHardware = () => {
   }
 
   const onHandlePauseTime = () => isPaused ? resumeTime() : pauseTime()
+
+  const handlePlayAgain = useCallback(() => {
+    !isWhiteTurn && toggleTurn()
+    setShowModal(false)
+    resumeTime()
+  }, [isWhiteTurn])
+
+  useEffect(() => {
+    hasGameEnd && setShowModal(true)
+  }, [hasGameEnd])
 
   return (
     <View style={styles.clockHardwareContainer}>
@@ -62,10 +75,11 @@ const ClockHardware = () => {
         <TouchableOpacity onPress={onHandlePauseTime} style={[buttonPrimaryStyle.button, styles.actionButton]}>
           <Text style={[buttonPrimaryStyle.text]}>{isPaused ? 'Resume' : 'Pause'}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[buttonPrimaryStyle.button, styles.actionButton]}>
+        <TouchableOpacity onPress={() => setShowModal(true)} style={[buttonPrimaryStyle.button, styles.actionButton]}>
           <Text style={[buttonPrimaryStyle.text]}>Finish</Text>
         </TouchableOpacity>
       </View>
+      {showModal && <GameOverModal closeModal={handlePlayAgain} goToHome={goBackToHome} isWhiteTurn={isWhiteTurn} />}
     </View>
   )
 }

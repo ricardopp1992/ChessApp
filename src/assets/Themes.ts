@@ -15,6 +15,7 @@ export const themes = {
   timerColor: '#BF7F00',
   backgroundInput: '#C4C4C450',
   timerSeparation: '33%',
+  modalColorText: '#000',
 }
 
 export const customDrawerStyle = StyleSheet.create({

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { ITime, TimeState } from '@interfaces/StoreInterfaces'
 import { RootChessAppState } from '@store/store'
-import { setBlacksTime, setWhitesTime } from '@store/timeSlice'
+import { endGame, setBlacksTime, setWhitesTime } from '@store/timeSlice'
 
 const useClock = () => {
   const { whitesTime, blacksTime } = useSelector<RootChessAppState, TimeState>(
@@ -21,7 +21,7 @@ const useClock = () => {
     clearInterval(timerId.current)
     setIsPaused(true)
   }
-  
+
   const resumeTime = () => {
     setIsPaused(false)
   }
@@ -35,13 +35,17 @@ const useClock = () => {
       newTime = { hours: hours - 1, minutes: reset, seconds: reset }
     } else if (seconds === 0) {
       newTime = { ...time, minutes: minutes - 1, seconds: reset }
-    } else if (minutes === 0) {
-      newTime = { ...time, minutes: reset }
     } else {
       newTime = {...time, seconds: seconds - 1}
     }
 
-    dispatch(setTime(newTime))
+    const isGameOver = newTime && Object.values(newTime).every(time => time === 0)
+    if (isGameOver) {
+      pauseTime()
+      dispatch(endGame(true))
+    } else {
+      dispatch(setTime(newTime))
+    }
   }
 
   useEffect(() => {

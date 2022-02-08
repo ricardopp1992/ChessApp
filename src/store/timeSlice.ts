@@ -14,7 +14,13 @@ const initialState: TimeState = {
     hours: 0,
     minutes: 0,
     seconds: 0
-  }
+  },
+  initialTime: {
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  },
+  hasGameEnd: false,
 }
 
 const timeSlice = createSlice<TimeState, SliceCaseReducers<TimeState>, string>({
@@ -40,16 +46,29 @@ const timeSlice = createSlice<TimeState, SliceCaseReducers<TimeState>, string>({
         minutes,
         seconds
       }
+      state.initialTime = {
+        hours,
+        minutes,
+        seconds
+      }
     },
     setWhitesTime(state: TimeState, action: SetTimeAction) {
       state.whitesTime = {...action.payload}
     },
     setBlacksTime(state: TimeState, action: SetTimeAction) {
       state.blacksTime = {...action.payload}
+    },
+    endGame(state: TimeState, action) {
+      state.hasGameEnd = action.payload
+    },
+    restoreTime(state: TimeState) {
+      state.whitesTime = state.initialTime
+      state.blacksTime = state.initialTime
+      state.hasGameEnd = false
     }
   }
 })
 
-export const { setNames, setTime, setWhitesTime, setBlacksTime } = timeSlice.actions
+export const { setNames, setTime, setWhitesTime, setBlacksTime, endGame, restoreTime } = timeSlice.actions
 
 export default timeSlice.reducer

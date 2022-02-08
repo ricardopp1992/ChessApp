@@ -14,4 +14,6 @@ export interface TimeState {
   blacksName: string
   whitesTime: ITime
   blacksTime: ITime
+  hasGameEnd: boolean
+  initialTime: ITime
 }
