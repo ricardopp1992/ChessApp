@@ -14,7 +14,7 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { buttonPrimaryStyle, themes } from '@assets/Themes'
 
 const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit }) => {
-  const initialValues: INewWatch = { whiteName: '', blackName: '', minutes: '', seconds: '' }
+  const initialValues: INewWatch = { whiteName: '', blackName: '', hours: '', minutes: '', seconds: '' }
   const [heightWithKeyboard, setHeightWithKeyboard] = useState<{ height?: string, marginTop?: string }>()
   const { height: windowHeight } = useWindowDimensions()
   const { values, handleChange, handleBlur, handleSubmit } = useFormik({
@@ -37,10 +37,6 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit }) => {
   const onHideKeyboard = () => {
     setHeightWithKeyboard({})
   }
-
-  useEffect(() => {
-    console.log(values);
-  }, [values])
 
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', onShowKeyboard)
@@ -73,17 +69,27 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit }) => {
             <View style={styles.inputs}>
               <TextInput
                 keyboardType="numeric"
+                onChangeText={handleChange('hours')}
+                onBlur={handleBlur('hours')}
+                value={values.hours}
+                style={styles.textInput} placeholder="00h" />
+
+              <Text style={{ marginHorizontal: '1%' }}>:</Text>
+              <TextInput
+                keyboardType="numeric"
                 onChangeText={handleChange('minutes')}
                 onBlur={handleBlur('minutes')}
                 value={values.minutes}
-                style={styles.textInput} placeholder="00min" />
+                style={styles.textInput} placeholder="00m" />
+
               <Text style={{ marginHorizontal: '1%' }}>:</Text>
+
               <TextInput
                 keyboardType="numeric"
                 onChangeText={handleChange('seconds')}
                 onBlur={handleBlur('seconds')}
                 value={values.seconds}
-                style={styles.textInput} placeholder="00sec" />
+                style={styles.textInput} placeholder="00s" />
             </View>
           </View>
         </View>

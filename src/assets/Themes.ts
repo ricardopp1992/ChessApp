@@ -10,8 +10,11 @@ export const themes = {
   grayColor: '#DEE2E6',
   secondaryColorText: '#000',
   headerHeight: 60,
+  footerHeight: 11,
   overlayColor: '#bf7f0085',
+  timerColor: '#BF7F00',
   backgroundInput: '#C4C4C450',
+  timerSeparation: '33%',
 }
 
 export const customDrawerStyle = StyleSheet.create({

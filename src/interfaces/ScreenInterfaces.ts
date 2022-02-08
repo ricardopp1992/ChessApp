@@ -13,5 +13,8 @@ export interface HomeButtonProps {
 
 export interface StartWatchScreenProps extends
   NativeStackScreenProps<RootStackNavigatorProps, StackNavigatorScreens.START_SCREEN> {
-
 }
+
+export interface ClockScreenProps extends
+  NativeStackScreenProps<RootStackNavigatorProps, StackNavigatorScreens.TIMER_SCREEN> {
+  }

@@ -11,6 +11,7 @@ export interface NewTimeModalProps {
 export interface INewWatch {
   whiteName: string,
   blackName: string,
+  hours: string,
   minutes: string,
   seconds: string,
 }

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: themes.primaryColor,
     width: '100%',
-    height: 80,
+    height: `${themes.footerHeight}%`,
     bottom: themes.headerHeight,
     left: 0
   },

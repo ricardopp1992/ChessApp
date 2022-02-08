@@ -21,9 +21,9 @@ const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
   const closeModal = () => setShowModal(false)
 
   const onHandleSubmit = (values: INewWatch) => {
-    const { whiteName, blackName, minutes, seconds } = values
+    const { whiteName, blackName, minutes, seconds, hours } = values
     dispatch(setNames({ whiteName, blackName }))
-    dispatch(setTime({ minutes, seconds }))
+    dispatch(setTime({ hours, minutes, seconds }))
     closeModal()
     navigation.navigate(StackNavigatorScreens.TIMER_SCREEN)
   }

@@ -1,10 +1,10 @@
-import { INewWatch } from '@interfaces/components/StartWatch.interface'
 import { configureStore } from '@reduxjs/toolkit'
 
+import { TimeState } from '@interfaces/StoreInterfaces'
 import timeReduce from '@store/timeSlice'
 
 export interface RootChessAppState {
-  time: INewWatch
+  time: TimeState
 }
 
 export default configureStore<RootChessAppState>({
