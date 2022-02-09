@@ -16,7 +16,7 @@ const PreviousTimes: FC<PreviousTimesProps> = ({ handleOpenModal }) => {
     <View style={styles.timeContainer}>
       <View style={styles.times}>
         {lastTimes.map((time) =>
-          <TouchableOpacity onPress={() => handleOpenModal(time)} style={styles.timeTouchable}>
+          <TouchableOpacity key={`${time.hours}:${time.minutes}:${time.seconds}`} onPress={() => handleOpenModal(time)} style={styles.timeTouchable}>
             <Text style={styles.touchableText}>
               {`${parseTime(time.hours)}:${parseTime(time.minutes)}:${parseTime(time.seconds)}`}
             </Text>

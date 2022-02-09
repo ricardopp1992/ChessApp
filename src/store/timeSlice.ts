@@ -58,7 +58,11 @@ const timeSlice = createSlice<TimeState, SliceCaseReducers<TimeState>, string>({
       const lastTimesLength = state.lastTimes.length
       const newTime = getTimeLabel(action.payload)
 
-      state.lastTimes = [newTime, ...state.lastTimes]
+      const noRepeatedTime = state.lastTimes.filter(({ hours, minutes, seconds }) =>
+        [hours, minutes, seconds].join('') !== [newTime.hours, newTime.minutes,newTime.seconds].join('')
+      )
+
+      state.lastTimes = [newTime, ...noRepeatedTime]
       if (lastTimesLength === 4) state.lastTimes.pop()
     },
     setWhitesTime(state: TimeState, action: SetTimeAction) {
