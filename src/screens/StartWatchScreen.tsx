@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Dimensions, StyleSheet, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 import { StartWatchScreenProps } from '@interfaces/ScreenInterfaces'
 import PreviousTimes from '@components/PreviousTimes'
@@ -7,23 +8,28 @@ import Footer from '@components/Footer/index'
 import NewTimeModal from '@components/PreviousTimes/NewTimeModal'
 import { INewWatch } from '@interfaces/components/StartWatch.interface'
 import { StackNavigatorScreens } from '../config'
-import { useDispatch } from 'react-redux'
-import { setNames, setTime } from '@store/timeSlice'
+import { setNames, setNewTime, setTime } from '@store/timeSlice'
 
 const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false)
+  const [prevTime, setPrevTime] = useState<INewWatch>();
   const dispatch = useDispatch()
 
-  const openNewModal = () => {
+  const openNewModal = (newTime: INewWatch | void) => {
+    newTime && setPrevTime(newTime)
     setShowModal(true)
   }
 
-  const closeModal = () => setShowModal(false)
+  const closeModal = () => {
+    setShowModal(false)
+    setPrevTime(undefined)
+  }
 
   const onHandleSubmit = (values: INewWatch) => {
     const { whiteName, blackName, minutes, seconds, hours } = values
     dispatch(setNames({ whiteName, blackName }))
     dispatch(setTime({ hours, minutes, seconds }))
+    dispatch(setNewTime(values))
     closeModal()
     navigation.navigate(StackNavigatorScreens.TIMER_SCREEN)
   }
@@ -31,7 +37,7 @@ const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
   return (
     <View style={styles.startWatchContainer}>
       <PreviousTimes handleOpenModal={openNewModal} />
-      {showModal && <NewTimeModal onHandleSubmit={onHandleSubmit} />}
+      {showModal && <NewTimeModal closeModal={closeModal} onHandleSubmit={onHandleSubmit} time={prevTime} />}
       <Footer />
     </View>
   )

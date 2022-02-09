@@ -1,3 +1,5 @@
+import { INewWatch } from "./components/StartWatch.interface";
+
 export type SetTimeAction = {
   payload: ITime,
   type: string
@@ -9,6 +11,10 @@ export interface ITime {
   seconds: number,
 }
 
+export interface ITimeLabel extends ITime {
+  label: string
+}
+
 export interface TimeState {
   whitesName: string
   blacksName: string
@@ -16,4 +22,5 @@ export interface TimeState {
   blacksTime: ITime
   hasGameEnd: boolean
   initialTime: ITime
+  lastTimes: INewWatch[]
 }

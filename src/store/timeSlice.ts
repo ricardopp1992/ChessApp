@@ -1,6 +1,7 @@
 import { createSlice, SliceCaseReducers } from '@reduxjs/toolkit'
 
 import { SetTimeAction, TimeState } from '@interfaces/StoreInterfaces'
+import { getTimeLabel } from '@utils/helpers'
 
 const initialState: TimeState = {
   whitesName: '',
@@ -20,6 +21,7 @@ const initialState: TimeState = {
     minutes: 0,
     seconds: 0
   },
+  lastTimes: [],
   hasGameEnd: false,
 }
 
@@ -52,6 +54,13 @@ const timeSlice = createSlice<TimeState, SliceCaseReducers<TimeState>, string>({
         seconds
       }
     },
+    setNewTime(state: TimeState, action) {
+      const lastTimesLength = state.lastTimes.length
+      const newTime = getTimeLabel(action.payload)
+
+      state.lastTimes = [newTime, ...state.lastTimes]
+      if (lastTimesLength === 4) state.lastTimes.pop()
+    },
     setWhitesTime(state: TimeState, action: SetTimeAction) {
       state.whitesTime = {...action.payload}
     },
@@ -69,6 +78,14 @@ const timeSlice = createSlice<TimeState, SliceCaseReducers<TimeState>, string>({
   }
 })
 
-export const { setNames, setTime, setWhitesTime, setBlacksTime, endGame, restoreTime } = timeSlice.actions
+export const {
+  setNames,
+  setTime,
+  setWhitesTime,
+  setBlacksTime,
+  endGame,
+  restoreTime,
+  setNewTime
+} = timeSlice.actions
 
 export default timeSlice.reducer

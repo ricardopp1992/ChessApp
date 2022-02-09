@@ -4,6 +4,9 @@ const styles = StyleSheet.create({
   timeContainer: {
     flex: 1,
   },
+  times: {
+    height: '50%',
+  },
   timeTouchable: {
     alignItems: 'center',
     borderBottomWidth: 1,

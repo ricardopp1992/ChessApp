@@ -1,17 +1,17 @@
-import { GestureResponderEvent } from 'react-native'
-
 export interface PreviousTimesProps {
-  handleOpenModal: (event: GestureResponderEvent) => void
+  handleOpenModal: (newTime: INewWatch | void) => void
 }
 
 export interface NewTimeModalProps {
+  time: INewWatch | undefined
+  closeModal: Function
   onHandleSubmit: (values: INewWatch) => void | Promise<void>
 }
 
 export interface INewWatch {
   whiteName: string,
   blackName: string,
-  hours: string,
-  minutes: string,
-  seconds: string,
+  hours: number,
+  minutes: number,
+  seconds: number,
 }
