@@ -10,10 +10,13 @@ const Modal: FC = ({ children }) => {
   const onShowKeyboard = (event: KeyboardEvent) => {
     const keyboardHeightPlusHeader = event.endCoordinates.height + themes.headerHeight
     const keyboardHeightPercentage = (keyboardHeightPlusHeader * 100) / windowHeight
+    const resizedModalHeight = themes.tallHeightDevice ? 15 : 5
+
     const heightStyle = StyleSheet.create({
       keyboardHeight: {
-        height: `${100 - (20 + keyboardHeightPercentage)}%`,
-        marginTop: '5%'
+        height: `${100 - (resizedModalHeight + keyboardHeightPercentage)}%`,
+        marginTop: themes.tallHeightDevice ? '5%' : '1%',
+        paddingVertical: themes.tallHeightDevice ? '5%' : '2%',
       }
     })
     setHeightWithKeyboard(heightStyle.keyboardHeight)

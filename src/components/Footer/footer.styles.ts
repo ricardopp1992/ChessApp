@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 import { themes } from '@assets/Themes'
 
@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     backgroundColor: themes.primaryColor,
     width: '100%',
     height: `${themes.footerHeight}%`,
-    bottom: themes.headerHeight,
+    bottom: 90,//themes.headerHeight,
     left: 0
   },
   queensImage: {

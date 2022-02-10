@@ -21,8 +21,8 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
   return (
     <Modal>
       <View>
-        <TouchableOpacity onPress={() => closeModal()}>
-          <Icon name="close-outline" style={styles.closeButton} />
+        <TouchableOpacity style={styles.closeTouchable} onPress={() => closeModal()}>
+          <Icon name="close-outline" style={styles.closeIcon} />
         </TouchableOpacity>
         <Text style={styles.modalText}>White Names: </Text>
         <TextInput
@@ -37,7 +37,7 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
           value={values.blackName}
           placeholder='black name' />
         {
-          Object.values(errors).map((error) => <Text style={styles.errors}>{error}</Text>)
+          Object.values(errors).map((error) => <Text key={error} style={styles.errors}>{error}</Text>)
         }
         <View style={styles.timeFormContainer}>
           <Text style={styles.newTimeText}>Add new time: </Text>
@@ -85,7 +85,12 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
 }
 
 const styles = StyleSheet.create({
-  closeButton: {
+  closeTouchable: {
+    position: 'absolute',
+    top: themes.tallHeightDevice ? -5 : -2,
+    right: 0,
+  },
+  closeIcon: {
     fontSize: 20,
     borderColor: themes.grayColor,
     borderRadius: 5,
@@ -105,8 +110,8 @@ const styles = StyleSheet.create({
     backgroundColor: themes.grayColor
   },
   timeFormContainer: {
-    marginTop: '10%',
-    alignSelf: 'center'
+    marginTop: themes.tallHeightDevice ? '10%' : '5%',
+    alignSelf: 'center',
   },
   newTimeText: {
     textAlign: 'center',

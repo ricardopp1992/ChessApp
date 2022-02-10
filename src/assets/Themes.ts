@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 
 export const themes = {
   buttonBorderRadius: 20,
@@ -16,6 +16,7 @@ export const themes = {
   backgroundInput: '#C4C4C450',
   timerSeparation: '33%',
   modalColorText: '#000',
+  tallHeightDevice: Dimensions.get('window').height > 700
 }
 
 export const customDrawerStyle = StyleSheet.create({
