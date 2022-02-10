@@ -3,6 +3,9 @@ import { INewWatch } from '@interfaces/components/StartWatch.interface'
 export const newTimeValidator = (values: INewWatch) => {
   let errors: { hours?: string, minutes?: string, seconds?: string } = {}
 
+  if (isNaN(values.hours) || isNaN(values.minutes) || isNaN(values.seconds)) {
+    errors.hours = 'Only numbers are allowed on time inputs'
+  }
   if (values.hours > 24) {
     errors.hours = 'Hours must not be greater than 24'
   }

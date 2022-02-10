@@ -2,13 +2,20 @@
  * @format
  */
 
-import 'react-native';
-import React from 'react';
-import App from '../App';
+import 'react-native'
+import React from 'react'
 
 // Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+import { render, fireEvent } from '@testing-library/react-native'
+
+import HomeScreen from '@screens/HomeScreen'
 
 it('renders correctly', () => {
-  renderer.create(<App />);
+  const navigation = {} as any
+  const routeMock = {} as any
+
+  const { getByText } = render(<HomeScreen route={routeMock} navigation={navigation} />);
+  const startButton = getByText(/Start/)
+
+  expect(startButton).toBeTruthy()
 });
