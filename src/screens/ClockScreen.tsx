@@ -32,7 +32,7 @@ const ClockScreen: FC<ClockScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   clockScreen: {
     backgroundColor: '#fff',
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('screen').height,
   }
 })
 

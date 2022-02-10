@@ -16,6 +16,7 @@ export const themes = {
   backgroundInput: '#C4C4C450',
   timerSeparation: '33%',
   modalColorText: '#000',
+  placeHolderColor: '#8f9091',
   tallHeightDevice: Dimensions.get('window').height > 700
 }
 

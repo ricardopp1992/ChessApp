@@ -1,15 +1,16 @@
-import { themes } from "@assets/Themes";
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
+
+import { themes } from '@assets/Themes'
 
 export default StyleSheet.create({
   clockHardwareContainer: {
     height: `${90 - themes.footerHeight}%`,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     paddingHorizontal: '5%',
   },
   timerContainer: {
-    height: '87%',
-    justifyContent: 'center'
+    height: '80%',
+    marginTop: themes.tallHeightDevice ? '5%': 0,
   },
   buttons: {
     marginVertical: '3%',
@@ -25,8 +26,16 @@ export default StyleSheet.create({
     color: themes.timerColor,
     fontWeight: '800'
   },
+  whitesButton: {
+    transform: [
+      { rotate: '180deg' }
+    ],
+  },
   whitesTime: {
     position: 'absolute',
+    transform: [
+      { rotate: '180deg' }
+    ],
     alignSelf: 'center',
     top: themes.timerSeparation,
   },

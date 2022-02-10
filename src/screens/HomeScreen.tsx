@@ -25,16 +25,6 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           >
             Start
           </ButtonHome>
-          <ButtonHome
-            onHandlePress={() => navigateTo(StackNavigatorScreens.START_SCREEN)}
-          >
-            Instructions
-          </ButtonHome>
-          <ButtonHome
-            onHandlePress={() => navigateTo(StackNavigatorScreens.START_SCREEN)}
-          >
-            History
-          </ButtonHome>
         </View>
       </View>
     </ImageBackground>
@@ -43,7 +33,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
 const ButtonHome: FC<HomeButtonProps> = ({ children, onHandlePress }) => {
   return (
-    <TouchableOpacity onPress={onHandlePress} style={buttonSecondaryStyle.button}>
+    <TouchableOpacity onPress={onHandlePress} style={[buttonSecondaryStyle.button]}>
       <Text style={buttonSecondaryStyle.text}>{children}</Text>
     </TouchableOpacity>
   )
@@ -68,6 +58,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'space-evenly',
     height: '40%',
+    minWidth: '35%',
   },
   chessTableBackground: {
     flex: 1,

@@ -29,11 +29,13 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
           onChangeText={handleChange('whiteName')}
           onBlur={handleBlur('whiteName')}
           value={values.whiteName}
+          placeholderTextColor={themes.placeHolderColor}
           placeholder='white name' />
         <Text style={styles.modalText}>Blacks Names: </Text>
         <TextInput
           onChangeText={handleChange('blackName')}
           onBlur={handleBlur('blackName')}
+          placeholderTextColor={themes.placeHolderColor}
           value={values.blackName}
           placeholder='black name' />
         {
@@ -47,6 +49,7 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
               onChangeText={handleChange('hours')}
               onBlur={handleBlur('hours')}
               value={`${values.hours || ''}`}
+              placeholderTextColor={themes.placeHolderColor}
               style={styles.textInput} placeholder="00h" />
 
             <Text style={{ marginHorizontal: '1%' }}>:</Text>
@@ -55,6 +58,7 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
               onChangeText={handleChange('minutes')}
               onBlur={handleBlur('minutes')}
               value={`${values.minutes || ''}`}
+              placeholderTextColor={themes.placeHolderColor}
               style={styles.textInput} placeholder="00m" />
 
             <Text style={{ marginHorizontal: '1%' }}>:</Text>
@@ -64,6 +68,7 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
               onChangeText={handleChange('seconds')}
               onBlur={handleBlur('seconds')}
               value={`${values.seconds || ''}`}
+              placeholderTextColor={themes.placeHolderColor}
               style={styles.textInput} placeholder="00s" />
           </View>
         </View>

@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
+
+import { themes } from '@assets/Themes'
 
 const styles = StyleSheet.create({
   timeContainer: {
@@ -14,6 +16,7 @@ const styles = StyleSheet.create({
     paddingVertical: '5%',
   },
   touchableText: {
+    color: themes.primaryColor,
     fontSize: 30
   },
   newTimeButton: {

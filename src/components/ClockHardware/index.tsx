@@ -50,7 +50,7 @@ const ClockHardware: FC<ClockHardwareProps> = ({ goBackToHome }) => {
       <View style={styles.timerContainer}>
         <TouchableOpacity
           onPress={() => allowPressTime('white')}
-          style={[buttonPrimaryStyle.button, styles.buttons, isWhiteTurn && styles.pressedButton]}
+          style={[buttonPrimaryStyle.button, styles.buttons, styles.whitesButton, isWhiteTurn && styles.pressedButton]}
         >
           <Text style={[buttonPrimaryStyle.text, isWhiteTurn && styles.pressedText]}>{whitesName || 'Whites'}</Text>
         </TouchableOpacity>
