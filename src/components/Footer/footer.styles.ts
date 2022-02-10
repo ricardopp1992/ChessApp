@@ -4,15 +4,15 @@ import { themes } from '@assets/Themes'
 
 const styles = StyleSheet.create({
   footerContainer: {
-    position: 'absolute',
+    position: 'relative',
     backgroundColor: themes.primaryColor,
     width: '100%',
     height: `${themes.footerHeight}%`,
-    bottom: 90,//themes.headerHeight,
+    bottom: themes.headerHeight,
     left: 0
   },
   queensImage: {
-    marginTop: '3%',
+    marginTop: themes.tallHeightDevice ? '3%' : '0%',
     width: '100%',
     height: '100%',
   }

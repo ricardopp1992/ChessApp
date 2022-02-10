@@ -9,6 +9,7 @@ import NewTimeModal from '@components/PreviousTimes/NewTimeModal'
 import { INewWatch } from '@interfaces/components/StartWatch.interface'
 import { StackNavigatorScreens } from '../config'
 import { setNames, setNewTime, setTime } from '@store/timeSlice'
+import { themes } from '@assets/Themes'
 
 const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false)
@@ -45,7 +46,7 @@ const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   startWatchContainer: {
-    height: Dimensions.get('window').height
+    height: Dimensions.get('window').height - (themes.tallHeightDevice ? 0 : 20),
   }
 })
 

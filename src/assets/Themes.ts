@@ -9,7 +9,7 @@ export const themes = {
   homeButton: '#996600',
   grayColor: '#DEE2E6',
   secondaryColorText: '#000',
-  headerHeight: 60,
+  headerHeight: 50,
   footerHeight: 11,
   overlayColor: '#bf7f0085',
   timerColor: '#BF7F00',
