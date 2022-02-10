@@ -1,18 +1,22 @@
 import React, { FC } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Button } from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { useFormik } from 'formik'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import { INewWatch, NewTimeModalProps } from '@interfaces/components/StartWatch.interface'
 import { buttonPrimaryStyle, themes } from '@assets/Themes'
 import Modal from '@components/Shared/Modal'
+import { newTimeValidator } from '@utils/formValidators'
 
 const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal }) => {
   const initialValues: INewWatch = time || { whiteName: '', blackName: '', hours: 0, minutes: 0, seconds: 0 }
-  const { values, handleChange, handleBlur, handleSubmit } = useFormik({
+  const { values, handleChange, handleBlur, handleSubmit, errors } = useFormik({
     initialValues,
-    onSubmit: onHandleSubmit
+    onSubmit: onHandleSubmit,
+    validate: newTimeValidator
   })
+
+  const disableButton = Object.keys(errors).length > 0
 
   return (
     <Modal>
@@ -32,6 +36,9 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
           onBlur={handleBlur('blackName')}
           value={values.blackName}
           placeholder='black name' />
+        {
+          Object.values(errors).map((error) => <Text style={styles.errors}>{error}</Text>)
+        }
         <View style={styles.timeFormContainer}>
           <Text style={styles.newTimeText}>Add new time: </Text>
           <View style={styles.inputs}>
@@ -64,7 +71,12 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
 
       <TouchableOpacity
         onPress={handleSubmit}
-        style={{ ...buttonPrimaryStyle.button, ...styles.startTimerButton }}
+        disabled={disableButton}
+        style={[
+          buttonPrimaryStyle.button,
+          styles.startTimerButton,
+          disableButton && styles.disableButton
+        ]}
       >
         <Text style={buttonPrimaryStyle.text}>Start Watch</Text>
       </TouchableOpacity>
@@ -89,6 +101,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '90%'
   },
+  disableButton: {
+    backgroundColor: themes.grayColor
+  },
   timeFormContainer: {
     marginTop: '10%',
     alignSelf: 'center'
@@ -108,6 +123,11 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     width: '30%',
     backgroundColor: themes.backgroundInput
+  },
+  errors: {
+    color: 'red',
+    fontSize: 10,
+    fontWeight: '700',
   }
 })
 
