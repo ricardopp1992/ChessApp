@@ -6,6 +6,7 @@ import { themes } from '@assets/Themes'
 const ScreenWrapper: FC = ({ children }) => {
   return (
     <View style={styles.startWatchContainer}>
+      <StatusBar backgroundColor={themes.primaryColor} />
       {children}
     </View>
   )

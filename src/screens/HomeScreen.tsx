@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react'
-import { ImageBackground, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, StatusBar } from 'react-native'
 
 import { buttonSecondaryStyle, themes } from '@assets/Themes'
 import { HomeButtonProps, HomeScreenProps } from 'interfaces/ScreenInterfaces'
@@ -16,6 +16,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   return (
     <ImageBackground style={styles.chessTableBackground} source={chessTableImg} >
+      <StatusBar backgroundColor={themes.primaryColor} />
       <ImageBackground source={queensImg} resizeMode="contain" style={styles.queenBackground} />
       <View style={styles.homeContainer}>
         <Text style={styles.chessWatchText}>Chess Watch</Text>
