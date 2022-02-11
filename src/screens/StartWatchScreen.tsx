@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react'
-import { Dimensions, StyleSheet, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
 import { StartWatchScreenProps } from '@interfaces/ScreenInterfaces'
@@ -9,7 +8,7 @@ import NewTimeModal from '@components/PreviousTimes/NewTimeModal'
 import { INewWatch } from '@interfaces/components/StartWatch.interface'
 import { StackNavigatorScreens } from '../config'
 import { setNames, setNewTime, setTime } from '@store/timeSlice'
-import { themes } from '@assets/Themes'
+import ScreenWrapper from '@components/Shared/ScreenWrapper'
 
 const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false)
@@ -36,18 +35,12 @@ const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.startWatchContainer}>
+    <ScreenWrapper>
       <PreviousTimes handleOpenModal={openNewModal} />
       {showModal && <NewTimeModal closeModal={closeModal} onHandleSubmit={onHandleSubmit} time={prevTime} />}
       <Footer />
-    </View>
+    </ScreenWrapper>
   )
 }
-
-const styles = StyleSheet.create({
-  startWatchContainer: {
-    height: Dimensions.get('window').height - (themes.tallHeightDevice ? 0 : 20),
-  }
-})
 
 export default StartWatchScreen

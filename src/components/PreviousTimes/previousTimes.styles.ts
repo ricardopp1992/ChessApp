@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   newTimeButton: {
     alignSelf: 'center',
-    marginTop: '10%',
+    marginTop: '45%',
     width: '80%',
   },
 })

@@ -24,9 +24,9 @@ const PreviousTimes: FC<PreviousTimesProps> = ({ handleOpenModal }) => {
         )}
       </View>
 
-      <TouchableHighlight onPress={() => handleOpenModal()} style={{ ...buttonPrimaryStyle.button, ...styles.newTimeButton }} >
+      <TouchableOpacity onPress={() => handleOpenModal()} style={{ ...buttonPrimaryStyle.button, ...styles.newTimeButton }} >
         <Text style={buttonPrimaryStyle.text}>New Time</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   )
 }

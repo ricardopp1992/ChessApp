@@ -1,14 +1,14 @@
-import { StyleSheet } from 'react-native'
+import { StatusBar, StyleSheet } from 'react-native'
 
 import { themes } from '@assets/Themes'
 
 const styles = StyleSheet.create({
   footerContainer: {
-    position: 'relative',
+    position: 'absolute',
     backgroundColor: themes.primaryColor,
     width: '100%',
     height: `${themes.footerHeight}%`,
-    bottom: themes.headerHeight,
+    bottom: StatusBar.currentHeight,
     left: 0
   },
   queensImage: {

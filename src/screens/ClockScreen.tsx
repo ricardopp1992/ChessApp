@@ -1,12 +1,14 @@
 import React, { FC, useEffect } from 'react'
-import { Dimensions, StyleSheet, View } from 'react-native'
+import { Dimensions, StatusBar, StyleSheet } from 'react-native'
+import { useDispatch } from 'react-redux'
 
 import { ClockScreenProps } from '@interfaces/ScreenInterfaces'
 import ClockHardware from '@components/ClockHardware'
 import Footer from '@components/Footer'
 import { StackNavigatorScreens } from '../config'
 import { endGame } from '@store/timeSlice'
-import { useDispatch } from 'react-redux'
+import { themes } from '@assets/Themes'
+import ScreenWrapper from '@components/Shared/ScreenWrapper'
 
 const ClockScreen: FC<ClockScreenProps> = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -22,17 +24,16 @@ const ClockScreen: FC<ClockScreenProps> = ({ navigation }) => {
   }, [])
 
   return (
-    <View style={styles.clockScreen}>
+    <ScreenWrapper>
       <ClockHardware goBackToHome={goBackToHome} />
       <Footer />
-    </View>
+    </ScreenWrapper>
   )
 }
 
 const styles = StyleSheet.create({
   clockScreen: {
-    backgroundColor: '#fff',
-    height: Dimensions.get('screen').height,
+    height: Dimensions.get('screen').height - themes.headerHeight - (themes.tallHeightDevice ? (StatusBar.currentHeight || 0) : 0),
   }
 })
 

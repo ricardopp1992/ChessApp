@@ -5,7 +5,7 @@ import { themes } from '@assets/Themes'
 export default StyleSheet.create({
   clockHardwareContainer: {
     height: `${90 - themes.footerHeight}%`,
-    justifyContent: 'flex-start',
+    justifyContent: 'space-around',
     paddingHorizontal: '5%',
   },
   timerContainer: {

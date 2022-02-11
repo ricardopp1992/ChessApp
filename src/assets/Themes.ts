@@ -17,7 +17,7 @@ export const themes = {
   timerSeparation: '33%',
   modalColorText: '#000',
   placeHolderColor: '#8f9091',
-  tallHeightDevice: Dimensions.get('window').height > 700
+  tallHeightDevice: Dimensions.get('screen').height > 640
 }
 
 export const customDrawerStyle = StyleSheet.create({
