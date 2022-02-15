@@ -5,14 +5,15 @@ import { themes } from '@assets/Themes'
 const styles = StyleSheet.create({
   timeContainer: {
     flex: 1,
+    paddingBottom: '15%',
   },
   times: {
     height: '50%',
   },
   timeTouchable: {
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#000',
+    borderBottomWidth: 2,
+    borderBottomColor: themes.grayColor,
     paddingVertical: '5%',
   },
   touchableText: {

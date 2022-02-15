@@ -14,9 +14,10 @@ export const themes = {
   overlayColor: '#bf7f0085',
   timerColor: '#BF7F00',
   backgroundInput: '#C4C4C450',
-  timerSeparation: '33%',
+  timerSeparation: '23%',
   modalColorText: '#000',
   placeHolderColor: '#8f9091',
+  inputColorText: '#000',
   tallHeightDevice: Dimensions.get('screen').height > 640
 }
 
@@ -58,11 +59,12 @@ export const buttonSecondaryStyle = StyleSheet.create({
     borderRadius: themes.buttonBorderRadius,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: '2%',
+    paddingVertical: '3%',
     paddingHorizontal: '7%',
   },
   text: {
     color: themes.textColor,
+    fontSize: 20,
     fontWeight: '800',
   }
 })
@@ -73,12 +75,12 @@ export const buttonPrimaryStyle = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: '2%',
+    paddingVertical: '4%',
     paddingHorizontal: '7%',
   },
   text: {
     color: themes.textColor,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '800',
   },
 })

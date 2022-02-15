@@ -75,7 +75,10 @@ const ClockHardware: FC<ClockHardwareProps> = ({ goBackToHome }) => {
         <TouchableOpacity onPress={onHandlePauseTime} style={[buttonPrimaryStyle.button, styles.actionButton]}>
           <Text style={[buttonPrimaryStyle.text]}>{isPaused ? 'Resume' : 'Pause'}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setShowModal(true)} style={[buttonPrimaryStyle.button, styles.actionButton]}>
+        <TouchableOpacity
+          onPress={() => setShowModal(true)}
+          disabled={!isPaused}
+          style={[buttonPrimaryStyle.button, styles.actionButton, !isPaused && styles.disableButton]}>
           <Text style={[buttonPrimaryStyle.text]}>Finish</Text>
         </TouchableOpacity>
       </View>

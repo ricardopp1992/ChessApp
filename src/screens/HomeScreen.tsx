@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     justifyContent: 'space-evenly',
-    height: '40%',
-    minWidth: '35%',
+    height: '30%',
+    minWidth: '40%',
   },
   chessTableBackground: {
     flex: 1,

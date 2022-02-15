@@ -10,19 +10,20 @@ export default StyleSheet.create({
   },
   timerContainer: {
     height: '80%',
-    marginTop: themes.tallHeightDevice ? '5%': 0,
+    marginTop: themes.tallHeightDevice ? '5%': '10%',
+    marginBottom: themes.tallHeightDevice ? '20%' : '35%'
   },
   buttons: {
-    marginVertical: '3%',
+    marginVertical: themes.tallHeightDevice ? '3%' : '2%',
   },
   timesBox: {
     width: '80%',
-    height: '70%',
+    height: '80%',
     justifyContent: 'center',
     alignSelf: 'center',
   },
   timer: {
-    fontSize: 35,
+    fontSize: themes.tallHeightDevice ? 45 : 40,
     color: themes.timerColor,
     fontWeight: '800'
   },
@@ -67,9 +68,11 @@ export default StyleSheet.create({
   actionButtonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 0,
   },
   actionButton: {
     width: '49%'
+  },
+  disableButton: {
+    backgroundColor: themes.grayColor
   }
 })

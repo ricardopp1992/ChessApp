@@ -30,14 +30,14 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
           onBlur={handleBlur('whiteName')}
           value={values.whiteName}
           placeholderTextColor={themes.placeHolderColor}
-          placeholder='white name' />
+          style={styles.textInput} placeholder='white name' />
         <Text style={styles.modalText}>Blacks Names: </Text>
         <TextInput
           onChangeText={handleChange('blackName')}
           onBlur={handleBlur('blackName')}
           placeholderTextColor={themes.placeHolderColor}
           value={values.blackName}
-          placeholder='black name' />
+          style={styles.textInput} placeholder='black name' />
         {
           Object.values(errors).map((error) => <Text key={error} style={styles.errors}>{error}</Text>)
         }
@@ -50,7 +50,7 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
               onBlur={handleBlur('hours')}
               value={`${values.hours || ''}`}
               placeholderTextColor={themes.placeHolderColor}
-              style={styles.textInput} placeholder="00h" />
+              style={[styles.textInput, styles.timeInputs]} placeholder="00h" />
 
             <Text style={{ marginHorizontal: '1%' }}>:</Text>
             <TextInput
@@ -59,7 +59,7 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
               onBlur={handleBlur('minutes')}
               value={`${values.minutes || ''}`}
               placeholderTextColor={themes.placeHolderColor}
-              style={styles.textInput} placeholder="00m" />
+              style={[styles.textInput, styles.timeInputs]} placeholder="00m" />
 
             <Text style={{ marginHorizontal: '1%' }}>:</Text>
 
@@ -69,7 +69,7 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
               onBlur={handleBlur('seconds')}
               value={`${values.seconds || ''}`}
               placeholderTextColor={themes.placeHolderColor}
-              style={styles.textInput} placeholder="00s" />
+              style={[styles.textInput, styles.timeInputs]} placeholder="00s" />
           </View>
         </View>
       </View>
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   startTimerButton: {
+    bottom: themes.tallHeightDevice ? '10%' : 0,
     alignSelf: 'center',
     width: '90%'
   },
@@ -130,9 +131,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textInput: {
+    color: themes.inputColorText,
+  },
+  timeInputs: {
     paddingVertical: 0,
     width: '30%',
-    backgroundColor: themes.backgroundInput
   },
   errors: {
     color: 'red',

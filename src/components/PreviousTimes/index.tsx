@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
-import { Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 
 import { PreviousTimesProps } from '@interfaces/components/StartWatch.interface'
 import { TimeState } from '@interfaces/StoreInterfaces'
@@ -16,7 +16,9 @@ const PreviousTimes: FC<PreviousTimesProps> = ({ handleOpenModal }) => {
     <View style={styles.timeContainer}>
       <View style={styles.times}>
         {lastTimes.map((time) =>
-          <TouchableOpacity key={`${time.hours}:${time.minutes}:${time.seconds}`} onPress={() => handleOpenModal(time)} style={styles.timeTouchable}>
+          <TouchableOpacity
+            key={`${time.hours}:${time.minutes}:${time.seconds}`}
+            onPress={() => handleOpenModal(time)} style={styles.timeTouchable}>
             <Text style={styles.touchableText}>
               {`${parseTime(time.hours)}:${parseTime(time.minutes)}:${parseTime(time.seconds)}`}
             </Text>
