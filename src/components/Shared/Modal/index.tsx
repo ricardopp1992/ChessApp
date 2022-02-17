@@ -1,11 +1,15 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Dimensions, Keyboard, KeyboardEvent, StyleSheet, useWindowDimensions, View } from 'react-native'
+import { Keyboard, KeyboardEvent, StyleSheet, useWindowDimensions, View } from 'react-native'
 
 import { themes } from '@assets/Themes'
+import useOrientation from '@components/hooks/useOrientation'
+import { OrientationEnum } from '@interfaces/Hooks.interfaces'
 
-const Modal: FC = ({ children }) => {
-  const [heightWithKeyboard, setHeightWithKeyboard] = useState<{ height?: string, marginTop?: string }>()
-  const { height: windowHeight } = useWindowDimensions()
+const Modal: FC<{ bodyHeight: string }> = ({ children, bodyHeight }) => {
+  const [heightWithKeyboard, setHeightWithKeyboard] = useState<{ height?: string, marginTop?: string }>({ height: bodyHeight })
+  const orientation = useOrientation()
+  const { height: windowHeight, width } = useWindowDimensions()
+  const isLandscape = orientation === OrientationEnum.LANDSCAPE
 
   const onShowKeyboard = (event: KeyboardEvent) => {
     const keyboardHeightPlusHeader = event.endCoordinates.height + themes.headerHeight
@@ -23,7 +27,7 @@ const Modal: FC = ({ children }) => {
   }
 
   const onHideKeyboard = () => {
-    setHeightWithKeyboard({})
+    setHeightWithKeyboard({ height: bodyHeight })
   }
 
   useEffect(() => {
@@ -36,8 +40,15 @@ const Modal: FC = ({ children }) => {
     }
   }, []);
   return (
-    <View style={styles.overlayModal}>
-      <View style={{ ...styles.newTimeModalContainer, ...heightWithKeyboard }}>
+    <View style={{
+      ...styles.overlayModal,
+      height: windowHeight,
+      width,
+    }}>
+      <View style={[
+        { ...styles.newTimeModalContainer, ...heightWithKeyboard },
+        isLandscape && styles.modalLandscape
+      ]}>
         {children}
       </View>
     </View>
@@ -49,8 +60,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     flex: 1,
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
     backgroundColor: themes.overlayColor,
   },
   newTimeModalContainer: {
@@ -65,7 +74,9 @@ const styles = StyleSheet.create({
     borderColor: themes.grayColor,
     justifyContent: 'space-between',
     width: '80%',
-    height: '50%'
+  },
+  modalLandscape: {
+    marginTop: '2%',
   },
 })
 

@@ -7,6 +7,8 @@ import { INewWatch, NewTimeModalProps } from '@interfaces/components/StartWatch.
 import { buttonPrimaryStyle, themes } from '@assets/Themes'
 import Modal from '@components/Shared/Modal'
 import { newTimeValidator } from '@utils/formValidators'
+import useOrientation from '@components/hooks/useOrientation'
+import { OrientationEnum } from '@interfaces/Hooks.interfaces'
 
 const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal }) => {
   const initialValues: INewWatch = time || { whiteName: '', blackName: '', hours: 0, minutes: 0, seconds: 0 }
@@ -15,29 +17,37 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
     onSubmit: onHandleSubmit,
     validate: newTimeValidator
   })
+  const orientation = useOrientation()
+  const isLandscape = orientation === OrientationEnum.LANDSCAPE
 
   const disableButton = Object.keys(errors).length > 0
 
   return (
-    <Modal>
+    <Modal bodyHeight={isLandscape ? '70%' : '50%'}>
+      <TouchableOpacity style={styles.closeTouchable} onPress={() => closeModal()}>
+        <Icon name="close-outline" style={styles.closeIcon} />
+      </TouchableOpacity>
       <View>
-        <TouchableOpacity style={styles.closeTouchable} onPress={() => closeModal()}>
-          <Icon name="close-outline" style={styles.closeIcon} />
-        </TouchableOpacity>
-        <Text style={styles.modalText}>White Names: </Text>
-        <TextInput
-          onChangeText={handleChange('whiteName')}
-          onBlur={handleBlur('whiteName')}
-          value={values.whiteName}
-          placeholderTextColor={themes.placeHolderColor}
-          style={styles.textInput} placeholder='white name' />
-        <Text style={styles.modalText}>Blacks Names: </Text>
-        <TextInput
-          onChangeText={handleChange('blackName')}
-          onBlur={handleBlur('blackName')}
-          placeholderTextColor={themes.placeHolderColor}
-          value={values.blackName}
-          style={styles.textInput} placeholder='black name' />
+        <View style={[isLandscape && styles.nameInputsLandscape]}>
+          <View style={{ width: '50%' }}>
+            <Text style={styles.modalText}>White Names: </Text>
+            <TextInput
+              onChangeText={handleChange('whiteName')}
+              onBlur={handleBlur('whiteName')}
+              value={values.whiteName}
+              placeholderTextColor={themes.placeHolderColor}
+              style={styles.textInput} placeholder='white name' />
+          </View>
+          <View style={{ width: '50%' }}>
+            <Text style={styles.modalText}>Blacks Names: </Text>
+            <TextInput
+              onChangeText={handleChange('blackName')}
+              onBlur={handleBlur('blackName')}
+              placeholderTextColor={themes.placeHolderColor}
+              value={values.blackName}
+              style={styles.textInput} placeholder='black name' />
+          </View>
+        </View>
         {
           Object.values(errors).map((error) => <Text key={error} style={styles.errors}>{error}</Text>)
         }
@@ -80,7 +90,8 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
         style={[
           buttonPrimaryStyle.button,
           styles.startTimerButton,
-          disableButton && styles.disableButton
+          disableButton && styles.disableButton,
+          isLandscape && { bottom: -10 }
         ]}
       >
         <Text style={buttonPrimaryStyle.text}>Start Watch</Text>
@@ -92,8 +103,8 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
 const styles = StyleSheet.create({
   closeTouchable: {
     position: 'absolute',
-    top: themes.APIgt27 ? -5 : -2,
-    right: 0,
+    top: 10,
+    right: 30,
   },
   closeIcon: {
     fontSize: 20,
@@ -103,12 +114,15 @@ const styles = StyleSheet.create({
     right: -20,
     alignSelf: 'flex-end',
   },
+  nameInputsLandscape: {
+    flexDirection: 'row'
+  },
   modalText: {
     color: themes.secondaryColorText,
     fontWeight: '800',
   },
   startTimerButton: {
-    bottom: themes.APIgt27 ? '10%' : 0,
+    bottom: '10%',
     alignSelf: 'center',
     width: '90%'
   },
