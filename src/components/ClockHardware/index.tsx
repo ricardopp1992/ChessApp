@@ -13,7 +13,7 @@ import styles from './clockHardware.style'
 
 const clockBackground = require('../../assets/queenVector.png')
 
-const ClockHardware: FC<ClockHardwareProps> = ({ goBackToHome }) => {
+const ClockHardware: FC<ClockHardwareProps> = ({ goBackToHome, isLandscape }) => {
   const {
     whitesTime,
     blacksTime,
@@ -46,31 +46,76 @@ const ClockHardware: FC<ClockHardwareProps> = ({ goBackToHome }) => {
   }, [hasGameEnd])
 
   return (
-    <View style={styles.clockHardwareContainer}>
-      <View style={styles.timerContainer}>
-        <TouchableOpacity
-          onPress={() => allowPressTime('white')}
-          style={[buttonPrimaryStyle.button, styles.buttons, styles.whitesButton, isWhiteTurn && styles.pressedButton]}
-        >
-          <Text style={[buttonPrimaryStyle.text, isWhiteTurn && styles.pressedText]}>{whitesName || 'Whites'}</Text>
-        </TouchableOpacity>
-        <View style={styles.timesBox}>
-          <ImageBackground style={styles.clockBackground} source={clockBackground} resizeMode="contain" />
-          <Text style={[styles.whitesTime, styles.timer]}>
-            {`${whitesTime.hours} : ${parseTime(whitesTime.minutes)} : ${parseTime(whitesTime.seconds)}`}
-          </Text>
-          <View style={styles.timeDivider} />
-          <Text style={[styles.blacksTime, styles.timer]}>
-            {`${blacksTime.hours} : ${parseTime(blacksTime.minutes)} : ${parseTime(blacksTime.seconds)}`}
-          </Text>
-        </View>
-        <TouchableOpacity
-          onPress={() => allowPressTime('black')}
-          style={[buttonPrimaryStyle.button, styles.buttons, !isWhiteTurn && styles.pressedButton]}
-        >
-          <Text style={[buttonPrimaryStyle.text, !isWhiteTurn && styles.pressedText]}>{blacksName || 'Black'}</Text>
-        </TouchableOpacity>
-      </View>
+    <View style={[styles.clockHardwareContainer, isLandscape && styles.clockHardwareContainerLandscape]}>
+      {
+        isLandscape ? (
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <TouchableOpacity
+              onPress={() => allowPressTime('white')}
+              style={[
+                buttonPrimaryStyle.button,
+                styles.buttons,
+                isLandscape && styles.buttonsLandscape,
+                isWhiteTurn && styles.pressedButton,
+                { width: '49%', height: '90%' }
+              ]}
+            >
+              <Text style={[
+                buttonPrimaryStyle.text,
+                isWhiteTurn && styles.pressedText,
+                isLandscape && styles.pressedTextLandscape
+              ]}>
+                {`${whitesTime.hours} : ${parseTime(whitesTime.minutes)} : ${parseTime(whitesTime.seconds)}`}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => allowPressTime('black')}
+              style={[
+                buttonPrimaryStyle.button,
+                styles.buttons,
+                isLandscape && styles.buttonsLandscape,
+                !isWhiteTurn && styles.pressedButton,
+                { width: '49%', height: '90%' }
+              ]}
+            >
+              <Text style={[
+                buttonPrimaryStyle.text,
+                !isWhiteTurn && styles.pressedText,
+                isLandscape && styles.pressedTextLandscape
+              ]}>
+                {`${blacksTime.hours} : ${parseTime(blacksTime.minutes)} : ${parseTime(blacksTime.seconds)}`}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.timerContainer}>
+            <TouchableOpacity
+              onPress={() => allowPressTime('white')}
+              style={[buttonPrimaryStyle.button, styles.buttons, styles.whitesButton, isWhiteTurn && styles.pressedButton]}
+            >
+              <Text style={[buttonPrimaryStyle.text, isWhiteTurn && styles.pressedText]}>{whitesName || 'Whites'}</Text>
+            </TouchableOpacity>
+            <View style={styles.timesBox}>
+              <ImageBackground style={styles.clockBackground} source={clockBackground} resizeMode="contain" />
+              <Text style={[styles.whitesTime, styles.timer]}>
+                {`${whitesTime.hours} : ${parseTime(whitesTime.minutes)} : ${parseTime(whitesTime.seconds)}`}
+              </Text>
+              <View style={styles.timeDivider} />
+              <Text style={[styles.blacksTime, styles.timer]}>
+                {`${blacksTime.hours} : ${parseTime(blacksTime.minutes)} : ${parseTime(blacksTime.seconds)}`}
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => allowPressTime('black')}
+              style={[buttonPrimaryStyle.button, styles.buttons, !isWhiteTurn && styles.pressedButton]}
+            >
+              <Text style={[buttonPrimaryStyle.text, !isWhiteTurn && styles.pressedText]}>{blacksName || 'Black'}</Text>
+            </TouchableOpacity>
+          </View>
+        )
+      }
+
+      {/** Keep these */}
       <View style={styles.actionButtonsContainer}>
         <TouchableOpacity onPress={onHandlePauseTime} style={[buttonPrimaryStyle.button, styles.actionButton]}>
           <Text style={[buttonPrimaryStyle.text]}>{isPaused ? 'Resume' : 'Pause'}</Text>

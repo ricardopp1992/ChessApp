@@ -8,6 +8,9 @@ export default StyleSheet.create({
     justifyContent: 'space-around',
     paddingHorizontal: '5%',
   },
+  clockHardwareContainerLandscape: {
+    height: themes.APIgt27 ? '80%' : '90%'
+  },
   timerContainer: {
     height: '80%',
     marginTop: themes.APIgt27 ? '5%': '10%',
@@ -15,6 +18,9 @@ export default StyleSheet.create({
   },
   buttons: {
     marginVertical: themes.APIgt27 ? '3%' : '2%',
+  },
+  buttonsLandscape: {
+    marginVertical: '2%',
   },
   timesBox: {
     width: '80%',
@@ -64,6 +70,9 @@ export default StyleSheet.create({
   },
   pressedText: {
     color: themes.primaryColor
+  },
+  pressedTextLandscape: {
+    fontSize: 50,
   },
   actionButtonsContainer: {
     flexDirection: 'row',

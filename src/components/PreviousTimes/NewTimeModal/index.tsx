@@ -20,7 +20,8 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
   const orientation = useOrientation()
   const isLandscape = orientation === OrientationEnum.LANDSCAPE
 
-  const disableButton = Object.keys(errors).length > 0
+  const disableButton = Object.keys(errors).length > 0 ||
+    (values.hours == 0 && values.minutes == 0 && values.seconds == 0)
 
   return (
     <Modal bodyHeight={isLandscape ? '70%' : '50%'}>

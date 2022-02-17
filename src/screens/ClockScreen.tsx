@@ -9,9 +9,13 @@ import { StackNavigatorScreens } from '../config'
 import { endGame } from '@store/timeSlice'
 import { themes } from '@assets/Themes'
 import ScreenWrapper from '@components/Shared/ScreenWrapper'
+import useOrientation from '@components/hooks/useOrientation'
+import { OrientationEnum } from '@interfaces/Hooks.interfaces'
 
 const ClockScreen: FC<ClockScreenProps> = ({ navigation }) => {
   const dispatch = useDispatch()
+  const orientation = useOrientation()
+  const isLandscape = orientation === OrientationEnum.LANDSCAPE
 
   const goBackToHome = () => {
     navigation.navigate(StackNavigatorScreens.HOME_SCREEN)
@@ -25,16 +29,10 @@ const ClockScreen: FC<ClockScreenProps> = ({ navigation }) => {
 
   return (
     <ScreenWrapper>
-      <ClockHardware goBackToHome={goBackToHome} />
-      <Footer />
+      <ClockHardware isLandscape={isLandscape} goBackToHome={goBackToHome} />
+      {isLandscape || <Footer />}
     </ScreenWrapper>
   )
 }
-
-const styles = StyleSheet.create({
-  clockScreen: {
-    height: Dimensions.get('screen').height - themes.headerHeight - (themes.APIgt27 ? (StatusBar.currentHeight || 0) : 0),
-  }
-})
 
 export default ClockScreen

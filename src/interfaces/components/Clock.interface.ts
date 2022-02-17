@@ -1,4 +1,5 @@
 export interface ClockHardwareProps {
+  isLandscape: boolean
   goBackToHome: () => void
 }
 
