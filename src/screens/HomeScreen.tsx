@@ -4,21 +4,25 @@ import { ImageBackground, StyleSheet, Text, View, TouchableOpacity, StatusBar } 
 import { buttonSecondaryStyle, themes } from '@assets/Themes'
 import { HomeButtonProps, HomeScreenProps } from 'interfaces/ScreenInterfaces'
 import { StackNavigatorScreens } from '../config'
+import useOrientation from '@components/hooks/useOrientation'
+import { OrientationEnum } from '@interfaces/Hooks.interfaces'
 
 const chessTableImg = require('../assets/Tablero.png')
 const queensImg = require('../assets/queens.png')
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+  const orientation = useOrientation()
   const navigateTo = useCallback((screen: StackNavigatorScreens) =>
-    navigation.navigate(screen),
-    [navigation]
+  navigation.navigate(screen),
+  [navigation]
   )
+  const isLandscape = orientation === OrientationEnum.LANDSCAPE
 
   return (
     <ImageBackground style={styles.chessTableBackground} source={chessTableImg} >
       <StatusBar backgroundColor={themes.primaryColor} />
       <ImageBackground source={queensImg} resizeMode="contain" style={styles.queenBackground} />
-      <View style={styles.homeContainer}>
+      <View style={[styles.homeContainer, isLandscape && styles.homeContainerLandscape]}>
         <Text style={styles.chessWatchText}>Chess Watch</Text>
         <View style={styles.buttonContainer}>
           <ButtonHome
@@ -45,6 +49,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     marginTop: '30%',
+  },
+  homeContainerLandscape: {
+    marginTop: '10%',
   },
   chessWatchText: {
     backgroundColor: themes.primaryTransparent,

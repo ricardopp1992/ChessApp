@@ -18,7 +18,7 @@ export const themes = {
   modalColorText: '#000',
   placeHolderColor: '#8f9091',
   inputColorText: '#000',
-  tallHeightDevice: Dimensions.get('screen').height > 640
+  tallHeightDevice: Dimensions.get('screen').height > 640,
 }
 
 export const customDrawerStyle = StyleSheet.create({
