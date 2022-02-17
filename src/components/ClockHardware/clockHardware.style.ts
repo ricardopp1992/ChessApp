@@ -10,11 +10,11 @@ export default StyleSheet.create({
   },
   timerContainer: {
     height: '80%',
-    marginTop: themes.tallHeightDevice ? '5%': '10%',
-    marginBottom: themes.tallHeightDevice ? '20%' : '35%'
+    marginTop: themes.APIgt27 ? '5%': '10%',
+    marginBottom: themes.APIgt27 ? '20%' : '35%'
   },
   buttons: {
-    marginVertical: themes.tallHeightDevice ? '3%' : '2%',
+    marginVertical: themes.APIgt27 ? '3%' : '2%',
   },
   timesBox: {
     width: '80%',
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
   timer: {
-    fontSize: themes.tallHeightDevice ? 45 : 40,
+    fontSize: themes.APIgt27 ? 45 : 40,
     color: themes.timerColor,
     fontWeight: '800'
   },

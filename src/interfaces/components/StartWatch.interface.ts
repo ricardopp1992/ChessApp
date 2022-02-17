@@ -1,4 +1,5 @@
 export interface PreviousTimesProps {
+  isLandscape: boolean,
   handleOpenModal: (newTime: INewWatch | void) => void
 }
 

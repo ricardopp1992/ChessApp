@@ -92,7 +92,7 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
 const styles = StyleSheet.create({
   closeTouchable: {
     position: 'absolute',
-    top: themes.tallHeightDevice ? -5 : -2,
+    top: themes.APIgt27 ? -5 : -2,
     right: 0,
   },
   closeIcon: {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   startTimerButton: {
-    bottom: themes.tallHeightDevice ? '10%' : 0,
+    bottom: themes.APIgt27 ? '10%' : 0,
     alignSelf: 'center',
     width: '90%'
   },
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     backgroundColor: themes.grayColor
   },
   timeFormContainer: {
-    marginTop: themes.tallHeightDevice ? '10%' : '5%',
+    marginTop: themes.APIgt27 ? '10%' : '5%',
     alignSelf: 'center',
   },
   newTimeText: {

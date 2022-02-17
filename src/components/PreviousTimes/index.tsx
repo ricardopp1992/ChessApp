@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useSelector } from 'react-redux'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 import { PreviousTimesProps } from '@interfaces/components/StartWatch.interface'
 import { TimeState } from '@interfaces/StoreInterfaces'
@@ -9,12 +9,12 @@ import { RootChessAppState } from '@store/store'
 import styles from './previousTimes.styles'
 import { parseTime } from '@utils/helpers'
 
-const PreviousTimes: FC<PreviousTimesProps> = ({ handleOpenModal }) => {
+const PreviousTimes: FC<PreviousTimesProps> = ({ handleOpenModal, isLandscape }) => {
   const { lastTimes } = useSelector<RootChessAppState, TimeState>(state => state.time)
 
   return (
     <View style={styles.timeContainer}>
-      <View style={styles.times}>
+      <ScrollView style={[styles.times, isLandscape && styles.landScapeTime]}>
         {lastTimes.map((time) =>
           <TouchableOpacity
             key={`${time.hours}:${time.minutes}:${time.seconds}`}
@@ -24,9 +24,12 @@ const PreviousTimes: FC<PreviousTimesProps> = ({ handleOpenModal }) => {
             </Text>
           </TouchableOpacity>
         )}
-      </View>
+      </ScrollView>
 
-      <TouchableOpacity onPress={() => handleOpenModal()} style={{ ...buttonPrimaryStyle.button, ...styles.newTimeButton }} >
+      <TouchableOpacity
+        onPress={() => handleOpenModal()}
+        style={[ buttonPrimaryStyle.button, styles.newTimeButton, isLandscape && styles.timeButtonLandscape]}
+      >
         <Text style={buttonPrimaryStyle.text}>New Time</Text>
       </TouchableOpacity>
     </View>

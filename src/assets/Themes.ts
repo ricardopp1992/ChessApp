@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Platform, StyleSheet } from 'react-native'
 
 export const themes = {
   buttonBorderRadius: 20,
@@ -18,7 +18,7 @@ export const themes = {
   modalColorText: '#000',
   placeHolderColor: '#8f9091',
   inputColorText: '#000',
-  tallHeightDevice: Dimensions.get('screen').height > 640,
+  APIgt27: Platform.Version > 27,
 }
 
 export const customDrawerStyle = StyleSheet.create({

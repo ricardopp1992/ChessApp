@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     left: 0
   },
   queensImage: {
-    marginTop: themes.tallHeightDevice ? '3%' : '0%',
+    marginTop: themes.APIgt27 ? '3%' : '0%',
     width: '100%',
     height: '100%',
   }

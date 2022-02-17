@@ -33,7 +33,7 @@ const ClockScreen: FC<ClockScreenProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   clockScreen: {
-    height: Dimensions.get('screen').height - themes.headerHeight - (themes.tallHeightDevice ? (StatusBar.currentHeight || 0) : 0),
+    height: Dimensions.get('screen').height - themes.headerHeight - (themes.APIgt27 ? (StatusBar.currentHeight || 0) : 0),
   }
 })
 
