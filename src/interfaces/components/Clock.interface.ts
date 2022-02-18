@@ -4,7 +4,8 @@ export interface ClockHardwareProps {
 }
 
 export interface GameOverModalProps {
+  isLandscape: boolean
   goToHome: Function
-  isWhiteTurn: boolean,
-  closeModal: Function,
+  isWhiteTurn: boolean
+  closeModal: Function
 }

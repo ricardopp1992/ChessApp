@@ -115,7 +115,6 @@ const ClockHardware: FC<ClockHardwareProps> = ({ goBackToHome, isLandscape }) =>
         )
       }
 
-      {/** Keep these */}
       <View style={styles.actionButtonsContainer}>
         <TouchableOpacity onPress={onHandlePauseTime} style={[buttonPrimaryStyle.button, styles.actionButton]}>
           <Text style={[buttonPrimaryStyle.text]}>{isPaused ? 'Resume' : 'Pause'}</Text>
@@ -127,7 +126,14 @@ const ClockHardware: FC<ClockHardwareProps> = ({ goBackToHome, isLandscape }) =>
           <Text style={[buttonPrimaryStyle.text]}>Finish</Text>
         </TouchableOpacity>
       </View>
-      {showModal && <GameOverModal closeModal={handlePlayAgain} goToHome={goBackToHome} isWhiteTurn={isWhiteTurn} />}
+      {showModal &&
+        <GameOverModal
+          isLandscape={isLandscape}
+          closeModal={handlePlayAgain}
+          goToHome={goBackToHome}
+          isWhiteTurn={isWhiteTurn}
+        />
+      }
     </View>
   )
 }

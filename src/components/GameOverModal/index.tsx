@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 const whitesWin = require('../../assets/whitesWin.png')
 const blacksWin = require('../../assets/blacksWin.png')
 
-const GameOverModal: FC<GameOverModalProps> = ({ goToHome, isWhiteTurn, closeModal }) => {
+const GameOverModal: FC<GameOverModalProps> = ({ goToHome, isWhiteTurn, closeModal, isLandscape }) => {
   const dispatch = useDispatch()
 
   const onHandleResetGame = () => {
@@ -26,12 +26,13 @@ const GameOverModal: FC<GameOverModalProps> = ({ goToHome, isWhiteTurn, closeMod
           <Text style={styles.titleWin}>{isWhiteTurn ? ' blacks ' : ' whites '}</Text>
           wins
         </Text>
-        {<Image style={styles.gameOverImage} source={!isWhiteTurn ? whitesWin: blacksWin} />
-        }
+        <Image
+          style={[styles.gameOverImage, isLandscape && styles.imageLandscape ]}
+          source={!isWhiteTurn ? whitesWin: blacksWin} />
         <TouchableOpacity onPress={onHandleResetGame} style={[buttonPrimaryStyle.button]}>
           <Text style={[buttonPrimaryStyle.text]}>Play again</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[buttonPrimaryStyle.button]} onPress={() => goToHome()}>
+        <TouchableOpacity style={[buttonPrimaryStyle.button, styles.marginTopLandscape]} onPress={() => goToHome()}>
           <Text style={[buttonPrimaryStyle.text]}>Go Back to Home</Text>
         </TouchableOpacity>
       </View>
@@ -55,7 +56,15 @@ const styles = StyleSheet.create({
   },
   gameOverImage: {
     alignSelf: 'center'
-  }
+  },
+  imageLandscape: {
+    marginVertical: '2%',
+    height: 60,
+    width: 60
+  },
+  marginTopLandscape: {
+    marginTop: '2%'
+  },
 })
 
 export default GameOverModal

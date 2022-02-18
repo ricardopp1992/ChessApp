@@ -5,7 +5,7 @@ import { themes } from '@assets/Themes'
 import useOrientation from '@components/hooks/useOrientation'
 import { OrientationEnum } from '@interfaces/Hooks.interfaces'
 
-const Modal: FC<{ bodyHeight: string }> = ({ children, bodyHeight }) => {
+const Modal: FC<{ bodyHeight?: string }> = ({ children, bodyHeight }) => {
   const [heightWithKeyboard, setHeightWithKeyboard] = useState<{ height?: string, marginTop?: string }>({ height: bodyHeight })
   const orientation = useOrientation()
   const { height: windowHeight, width } = useWindowDimensions()
