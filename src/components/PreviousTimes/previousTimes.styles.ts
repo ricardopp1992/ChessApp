@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     paddingBottom: '15%',
   },
   times: {
-    maxHeight: '50%',
+    maxHeight: '100%',
   },
   landScapeTime: {
     height: 350
@@ -25,13 +25,9 @@ const styles = StyleSheet.create({
   },
   newTimeButton: {
     alignSelf: 'center',
-    marginTop: '45%',
     width: '80%',
   },
   timeButtonLandscape: {
-    paddingVertical: '2%',
-    marginTop: 0,
-    bottom: '-5%',
   },
 })
 

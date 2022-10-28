@@ -1,13 +1,10 @@
 import React, { FC, useEffect } from 'react'
-import { Dimensions, StatusBar, StyleSheet } from 'react-native'
 import { useDispatch } from 'react-redux'
 
 import { ClockScreenProps } from '@interfaces/ScreenInterfaces'
 import ClockHardware from '@components/ClockHardware'
-import Footer from '@components/Footer'
 import { StackNavigatorScreens } from '../config'
 import { endGame } from '@store/timeSlice'
-import { themes } from '@assets/Themes'
 import ScreenWrapper from '@components/Shared/ScreenWrapper'
 import useOrientation from '@components/hooks/useOrientation'
 import { OrientationEnum } from '@interfaces/Hooks.interfaces'
@@ -30,7 +27,6 @@ const ClockScreen: FC<ClockScreenProps> = ({ navigation }) => {
   return (
     <ScreenWrapper>
       <ClockHardware isLandscape={isLandscape} goBackToHome={goBackToHome} />
-      {isLandscape || <Footer />}
     </ScreenWrapper>
   )
 }

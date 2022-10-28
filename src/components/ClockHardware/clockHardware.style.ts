@@ -4,20 +4,17 @@ import { themes } from '@assets/Themes'
 
 export default StyleSheet.create({
   clockHardwareContainer: {
-    height: `${90 - themes.footerHeight}%`,
+    flex: 1,
     justifyContent: 'space-around',
     paddingHorizontal: '5%',
   },
   clockHardwareContainerLandscape: {
-    height: themes.APIgt27 ? '80%' : '90%'
+    flex: 1,
   },
   timerContainer: {
     height: '80%',
-    marginTop: themes.APIgt27 ? '5%': '10%',
-    marginBottom: themes.APIgt27 ? '20%' : '35%'
   },
   buttons: {
-    marginVertical: themes.APIgt27 ? '3%' : '2%',
   },
   buttonsLandscape: {
     marginVertical: '2%',

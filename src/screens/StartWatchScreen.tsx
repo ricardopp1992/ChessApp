@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 
 import { StartWatchScreenProps } from '@interfaces/ScreenInterfaces'
 import PreviousTimes from '@components/PreviousTimes'
-import Footer from '@components/Footer/index'
 import NewTimeModal from '@components/PreviousTimes/NewTimeModal'
 import { INewWatch } from '@interfaces/components/StartWatch.interface'
 import { StackNavigatorScreens } from '../config'
@@ -42,7 +41,6 @@ const StartWatchScreen: FC<StartWatchScreenProps> = ({ navigation }) => {
     <ScreenWrapper>
       <PreviousTimes handleOpenModal={openNewModal} isLandscape={isLandscape} />
       {showModal && <NewTimeModal closeModal={closeModal} onHandleSubmit={onHandleSubmit} time={prevTime} />}
-      {isLandscape || <Footer />}
     </ScreenWrapper>
   )
 }
