@@ -6,7 +6,7 @@ import { themes } from '@assets/Themes'
 const ScreenWrapper: FC = ({ children }) => {
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, maxHeight: '100%' }}>
       <StatusBar backgroundColor={themes.primaryColor} />
       {children}
     </View>

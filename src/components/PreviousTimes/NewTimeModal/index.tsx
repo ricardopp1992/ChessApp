@@ -24,35 +24,35 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
     (values.hours == 0 && values.minutes == 0 && values.seconds == 0)
 
   return (
-    <Modal bodyHeight={isLandscape ? '70%' : '50%'}>
+    <Modal>
       <TouchableOpacity style={styles.closeTouchable} onPress={() => closeModal()}>
         <Icon name="close-outline" style={styles.closeIcon} />
       </TouchableOpacity>
       <View>
         <View style={[isLandscape && styles.nameInputsLandscape]}>
-          <View style={{ width: '50%' }}>
+          <View style={isLandscape && styles.nameInputLandscape}>
             <Text style={styles.modalText}>White Names: </Text>
             <TextInput
               onChangeText={handleChange('whiteName')}
               onBlur={handleBlur('whiteName')}
               value={values.whiteName}
               placeholderTextColor={themes.placeHolderColor}
-              style={styles.textInput} placeholder='white name' />
+              style={[styles.textInput, isLandscape && styles.textInputLandscape]} placeholder='white name' />
           </View>
-          <View style={{ width: '50%' }}>
+          <View style={isLandscape && styles.nameInputLandscape}>
             <Text style={styles.modalText}>Blacks Names: </Text>
             <TextInput
               onChangeText={handleChange('blackName')}
               onBlur={handleBlur('blackName')}
               placeholderTextColor={themes.placeHolderColor}
               value={values.blackName}
-              style={styles.textInput} placeholder='black name' />
+              style={[styles.textInput, isLandscape && styles.textInputLandscape]} placeholder='black name' />
           </View>
         </View>
         {
           Object.values(errors).map((error) => <Text key={error} style={styles.errors}>{error}</Text>)
         }
-        <View style={styles.timeFormContainer}>
+        <View style={[styles.timeFormContainer, isLandscape && styles.timeFormLandscape]}>
           <Text style={styles.newTimeText}>Add new time: </Text>
           <View style={styles.inputs}>
             <TextInput
@@ -61,7 +61,9 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
               onBlur={handleBlur('hours')}
               value={`${values.hours || ''}`}
               placeholderTextColor={themes.placeHolderColor}
-              style={[styles.textInput, styles.timeInputs]} placeholder="00h" />
+              style={[styles.textInput, styles.timeInputs, isLandscape && styles.textInputLandscape]}
+              placeholder="00h"
+            />
 
             <Text style={{ marginHorizontal: '1%' }}>:</Text>
             <TextInput
@@ -70,17 +72,20 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
               onBlur={handleBlur('minutes')}
               value={`${values.minutes || ''}`}
               placeholderTextColor={themes.placeHolderColor}
-              style={[styles.textInput, styles.timeInputs]} placeholder="00m" />
+              style={[styles.textInput, styles.timeInputs, isLandscape && styles.textInputLandscape]}
+              placeholder="00m"
+            />
 
             <Text style={{ marginHorizontal: '1%' }}>:</Text>
-
             <TextInput
               keyboardType="numeric"
               onChangeText={handleChange('seconds')}
               onBlur={handleBlur('seconds')}
               value={`${values.seconds || ''}`}
               placeholderTextColor={themes.placeHolderColor}
-              style={[styles.textInput, styles.timeInputs]} placeholder="00s" />
+              style={[styles.textInput, styles.timeInputs, isLandscape && styles.textInputLandscape]}
+              placeholder="00s"
+            />
           </View>
         </View>
       </View>
@@ -92,7 +97,7 @@ const NewTimeModal: FC<NewTimeModalProps> = ({ onHandleSubmit, time, closeModal 
           buttonPrimaryStyle.button,
           styles.startTimerButton,
           disableButton && styles.disableButton,
-          isLandscape && { bottom: -10 }
+          isLandscape && { paddingVertical: 5, marginVertical: '5%' }
         ]}
       >
         <Text style={buttonPrimaryStyle.text}>Start Watch</Text>
@@ -116,14 +121,17 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   nameInputsLandscape: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+  },
+  nameInputLandscape: {
+    width: '40%',
+    marginRight: '2%',
   },
   modalText: {
     color: themes.secondaryColorText,
     fontWeight: '800',
   },
   startTimerButton: {
-    bottom: '10%',
     alignSelf: 'center',
     width: '90%'
   },
@@ -133,6 +141,9 @@ const styles = StyleSheet.create({
   timeFormContainer: {
     marginTop: themes.APIgt27 ? '10%' : '5%',
     alignSelf: 'center',
+  },
+  timeFormLandscape: {
+    marginTop: 0,
   },
   newTimeText: {
     textAlign: 'center',
@@ -147,9 +158,17 @@ const styles = StyleSheet.create({
   },
   textInput: {
     color: themes.inputColorText,
+    paddingVertical: 15,
+    paddingHorizontal: 12,
+    marginVertical: 5,
+    borderWidth: 2,
+    borderColor: themes.grayColor,
+    borderRadius: 10,
+  },
+  textInputLandscape: {
+    paddingVertical: 2,
   },
   timeInputs: {
-    paddingVertical: 0,
     width: '30%',
   },
   errors: {

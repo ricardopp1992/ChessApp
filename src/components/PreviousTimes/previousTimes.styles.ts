@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     maxHeight: '100%',
   },
   landScapeTime: {
-    height: 350
+    height: '130%'
   },
   timeTouchable: {
     alignItems: 'center',
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   timeButtonLandscape: {
+    paddingVertical: '1%',
   },
 })
 
