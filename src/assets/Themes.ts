@@ -66,6 +66,7 @@ export const buttonSecondaryStyle = StyleSheet.create({
     color: themes.textColor,
     fontSize: 20,
     fontWeight: '800',
+    paddingVertical: 5
   }
 })
 

@@ -24,7 +24,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
       <ImageBackground source={queensImg} resizeMode="contain" style={styles.queenBackground} />
       <View style={[styles.homeContainer, isLandscape && styles.homeContainerLandscape]}>
         <Text style={styles.chessWatchText}>Chess Watch</Text>
-        <View style={styles.buttonContainer}>
+        <View style={[styles.buttonContainer, isLandscape && styles.buttonContainerLandscape]}>
           <ButtonHome
             onHandlePress={() => navigateTo(StackNavigatorScreens.START_SCREEN)}
           >
@@ -51,22 +51,27 @@ const styles = StyleSheet.create({
     marginTop: '30%',
   },
   homeContainerLandscape: {
-    marginTop: '10%',
+    justifyContent: 'space-around',
+    marginTop: '5%',
   },
   chessWatchText: {
     backgroundColor: themes.primaryTransparent,
     color: themes.textColor,
     paddingVertical: '2%',
     paddingHorizontal: '7%',
-    marginBottom: '10%',
     borderRadius: themes.buttonBorderRadius,
     fontSize: 30,
     fontWeight: '800',
   },
   buttonContainer: {
     justifyContent: 'space-evenly',
-    height: '30%',
+    minWidth: '70%',
+    position: 'absolute',
+    bottom: 30,
+  },
+  buttonContainerLandscape: {
     minWidth: '40%',
+    bottom: 0,
   },
   chessTableBackground: {
     flex: 1,
