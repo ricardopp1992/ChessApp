@@ -34,7 +34,7 @@ const CustomDrawer: FC<DrawerContentComponentProps> = (props) => {
     <View style={customDrawerStyle.drawerContainer}>
       <View style={customDrawerStyle.logoContainer}>
         <Image source={iconLogo} resizeMode="contain" style={customDrawerStyle.image} />
-        <Text style={customDrawerStyle.logoText}>Chess Watch</Text>
+        <Text style={customDrawerStyle.logoText}>Chess Clock</Text>
       </View>
       <View style={customDrawerStyle.drawerItems}>
         <TouchableOpacity onPress={() => navigateTo(StackNavigatorScreens.HOME_SCREEN)}>

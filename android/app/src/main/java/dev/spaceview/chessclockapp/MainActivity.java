@@ -1,4 +1,4 @@
-package com.chessapp2;
+package dev.spaceview.chessclockapp;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "ChessApp2";
+    return "ChessClock";
   }
 
   @Override

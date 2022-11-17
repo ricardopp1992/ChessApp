@@ -28,7 +28,7 @@ const GameOverModal: FC<GameOverModalProps> = ({ goToHome, isWhiteTurn, closeMod
         </Text>
         <Image
           style={[styles.gameOverImage, isLandscape && styles.imageLandscape ]}
-          source={!isWhiteTurn ? whitesWin: blacksWin} />
+          source={!isWhiteTurn ? whitesWin : blacksWin} />
         <TouchableOpacity onPress={onHandleResetGame} style={[buttonPrimaryStyle.button]}>
           <Text style={[buttonPrimaryStyle.text]}>Play again</Text>
         </TouchableOpacity>
